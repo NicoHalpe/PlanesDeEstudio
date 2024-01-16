@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.App {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1E1E1E;
+}
+
+.App *:not(.mantine *), .App *::before, .App *::after {
+  box-sizing: content-box;
+}
+
+.react-flow__controls,
+.react-flow__controls-button {
+  background-color: #181818 !important;
+  color: #4A4A4A !important;
+}
+
+.react-flow__controls-button {
+  border: 1px solid #4A4A4A !important;
+}
+
+.react-flow__controls-button svg path {
+  fill: #4A4A4A !important;
+}
+
+a {
+  text-decoration: none;
+  color: "#FFDD55" !important;
+}
+
+a:visited {
+  text-decoration: none;
+  color:"#FFDD55" !important;
+}
+
+.react-flow__attribution{
+  display: none;
+}

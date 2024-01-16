@@ -1,0 +1,463 @@
+[
+    {
+        "name": "Licenciatura en Ciencias de Datos",
+        "plan": {
+            "CBC": [
+                {
+                    "tituloIntermedio": true,
+                    "label": "IPC",
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Análisis",
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Química",
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "ICSE",
+                    "cuatrimestre": 2,
+                    "requires": []
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Álgebra",
+                    "cuatrimestre": 2,
+                    "requires": []
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Física",
+                    "cuatrimestre": 2,
+                    "requires": []
+                }
+            ],
+            "1er Año": [
+                {
+                    "tituloIntermedio": true,
+                    "label": "Álgebra I",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Algoritmos y Estructuras de Datos I",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Electiva de Introducción a las Ciencias Naturales",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Análisis I",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "CBC"
+                    ]
+                }
+            ],
+            "2do Año": [
+                {
+                    "tituloIntermedio": true,
+                    "label": "Laboratorio de Datos",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos I"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Análisis II",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Análisis I"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Álgebra Lineal Computacional",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Álgebra I",
+                        "Algoritmos y Estructuras de Datos I"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Algoritmos y Estructuras de Datos II",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Álgebra I",
+                        "Algoritmos y Estructuras de Datos I"
+                    ]
+                },
+                {
+                    "tituloIntermedio": false,
+                    "label": "Análisis Avanzado",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Análisis II",
+                        "Álgebra I"
+                    ]
+                }
+            ],
+            "3er Año": [
+                {
+                    "tituloIntermedio": false,
+                    "label": "Probabilidad",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Análisis Avanzado"
+                    ]
+                },
+                {
+                    "tituloIntermedio": false,
+                    "label": "Algoritmos y Estructuras de Datos III",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos II"
+                    ]
+                },
+                {
+                    "tituloIntermedio": false,
+                    "label": "Intr. a la Estadística y Ciencia de Datos",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Laboratorio de Datos",
+                        "Probabilidad",
+                        "Álgebra Lineal Computacional"
+                    ]
+                },
+                {
+                    "tituloIntermedio": false,
+                    "label": "Intr. al Modelado Continuo",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Análisis Avanzado",
+                        "Álgebra Lineal Computacional",
+                        "Algoritmos y Estructuras de Datos II"
+                    ]
+                },
+                {
+                    "tituloIntermedio": false,
+                    "label": "Intr. a la Investigación Operativa y Optimización",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos III",
+                        "Análisis II",
+                        "Álgebra Lineal Computacional"
+                    ]
+                }
+            ],
+            "4to Año": [
+                {
+                    "tituloIntermedio": false,
+                    "label": "Materias Optativas",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "3er Año"
+                    ]
+                },
+                {
+                    "tituloIntermedio": false,
+                    "label": "Tésis / Proyecto Final",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "3er Año"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "name": "Licenciatura en Ciencias de la Computación",
+        "plan": {
+            "CBC": [
+                {
+                    "label": "ICSE",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "IPC",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Análisis",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Álgebra",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Física",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Química",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [],
+                    "tituloIntermedio": true
+                }
+            ],
+            "1er Año": [
+                {
+                    "label": "Introducción a la Programación",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Álgebra I",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Algoritmos y Estructuras de Datos",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Introducción a la Programación",
+                        "Álgebra I",
+                        "CBC"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Análisis I",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "CBC"
+                    ],
+                    "tituloIntermedio": false
+                }
+            ],
+            "2do Año": [
+                {
+                    "label": "Paradigmas de Programación",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Técnicas de Diseño de Algoritmos",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Sistemas Digitales",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Introducción a la Programación"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Ingeniería de Software",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Paradigmas de Programación"
+                    ],
+                    "tituloIntermedio": true
+                },
+                {
+                    "label": "Lenguajes Formales, Autómatas y Computabilidad",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Arquitectura y Organización de Computadores",
+                    "background": "#d7faf5",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Sistemas Digitales"
+                    ],
+                    "tituloIntermedio": true
+                }
+            ],
+            "3er Año": [
+                {
+                    "label": "Algebra Lineal Computacional",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Algoritmos y Estructuras de Datos",
+                        "Álgebra I"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Complejidad Computacional",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Técnicas de Diseño de Algoritmos",
+                        "Lenguajes Formales, Autómatas y Computabilidad"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Sistemas Operativos",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Arquitectura y Organización de Computadores"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Estadística Computacional",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algebra Lineal Computacional",
+                        "Análisis I"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Almacenamiento y recuperación de la información",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Ingeniería de Software"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Optativas 1 (4 créditos)",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [],
+                    "tituloIntermedio": false
+                }
+            ],
+            "4to Año": [
+                {
+                    "label": "Programación Concurrente y Paralela",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Paradigmas de Programación",
+                        "Sistemas Operativos"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Redes de Comunicaciones y Cómputo Distribuido",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Técnicas de Diseño de Algoritmos",
+                        "Sistemas Operativos",
+                        "Estadística Computacional"
+                    ],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Optativas 2 (4 créditos)",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 1,
+                    "requires": [],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Trabajo Final - Tesis de Licenciatura",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [],
+                    "tituloIntermedio": false
+                },
+                {
+                    "label": "Optativas 3 (8 créditos)",
+                    "background": "#f1c598",
+                    "foreground": "#000",
+                    "cuatrimestre": 2,
+                    "requires": [],
+                    "tituloIntermedio": false
+                }
+            ]
+        }
+    }
+]

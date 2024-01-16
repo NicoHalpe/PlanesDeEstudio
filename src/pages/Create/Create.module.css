@@ -1,0 +1,8 @@
+.item {
+	background-color: transparent !important;
+	border: 1px solid #d1d1d1 !important;
+
+	&[data-active] {
+		background-color: white !important;
+	}
+}
