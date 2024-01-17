@@ -26,7 +26,7 @@ import {
 } from "@mantine/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLocalStorage } from "@mantine/hooks";
-import { IconPlus } from "@tabler/icons-react";
+import { IconEdit, IconPencil, IconPlus } from "@tabler/icons-react";
 
 declare global {
 	interface Window {
@@ -472,7 +472,7 @@ function PlanPage(): ReactElement {
 								navigate("/create");
 							}}
 						>
-							<IconPlus style={{ width: "70%", height: "70%" }} stroke={1} />
+							<IconPencil style={{ width: "60%", height: "60%" }} stroke={1} />
 						</ActionIcon>
 					</Box>
 				) : (
