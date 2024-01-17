@@ -16,15 +16,15 @@
 .react-flow__controls,
 .react-flow__controls-button {
 	background-color: #181818 !important;
-	color: #4a4a4a !important;
+	color: #6e6e6e !important;
 }
 
 .react-flow__controls-button {
-	border: 1px solid #4a4a4a !important;
+	border: 1px solid #6e6e6e !important;
 }
 
 .react-flow__controls-button svg path {
-	fill: #4a4a4a !important;
+	fill: #6e6e6e !important;
 }
 
 a {

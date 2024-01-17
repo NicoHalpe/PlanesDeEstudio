@@ -454,6 +454,7 @@ function PlanPage(): ReactElement {
 							mb="sm"
 							data={parsedPlans.map((plan) => plan.name)}
 							value={selectedPlan.name}
+							allowDeselect={false}
 							onChange={(value) => {
 								const plan = parsedPlans.find((plan) => plan.name === value);
 								if (plan) {

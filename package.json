@@ -13,6 +13,7 @@
     "@mantine/core": "^7.4.1",
     "@mantine/form": "^7.4.1",
     "@mantine/hooks": "^7.4.1",
+    "@mantine/modals": "^7.4.1",
     "@tabler/icons-react": "^2.46.0",
     "html-to-image": "^1.11.11",
     "react": "^18.2.0",

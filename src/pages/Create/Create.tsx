@@ -16,6 +16,7 @@ import {
 	Paper,
 	Select,
 	Stack,
+	Text,
 	TextInput,
 	Title,
 	Tooltip,
@@ -29,6 +30,7 @@ import formatPlan from "../../utils/formatPlan";
 import parsePlan from "../../utils/parsePlan";
 import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import { defaultPlans } from "../../constants";
+import { modals } from "@mantine/modals";
 
 type Props = {};
 
@@ -72,12 +74,24 @@ export default function CreatePlan({}: Props) {
 		getInitialValueInEffect: false,
 	});
 
-	const [nombre, setNombre] = React.useState(
-		savedPlans.length ? savedPlans[0].name : "Nueva carrera"
-	);
+	let [selectedPlanName, setSelectedPlanName] = useLocalStorage({
+		key: "selectedPlan",
+		defaultValue: "",
+		serialize(value) {
+			return JSON.stringify(value);
+		},
+		deserialize(value) {
+			return value ? JSON.parse(value) : "";
+		},
+		getInitialValueInEffect: false,
+	});
+
+	const selectedPlan = savedPlans.find((plan) => plan.name === selectedPlanName) || savedPlans[0];
+
+	const [nombre, setNombre] = React.useState(savedPlans.length ? selectedPlan.name : "Nuevo plan");
 	const [plan, setPlan] = React.useState<FormPlan>(
 		savedPlans.length
-			? formatPlan(savedPlans[0].plan)
+			? formatPlan(selectedPlan.plan)
 			: [
 					{
 						nombre: "Primer año",
@@ -85,6 +99,10 @@ export default function CreatePlan({}: Props) {
 					},
 			  ]
 	);
+
+	useEffect(() => {
+		setSelectedPlanName(nombre);
+	}, [nombre]);
 
 	const [modalOpened, setModalOpened] = React.useState(false);
 
@@ -115,6 +133,25 @@ export default function CreatePlan({}: Props) {
 		setSavedPlans(updatedPlans);
 
 		setModalOpened(true);
+	};
+
+	const deletePlan = () => {
+		modals.openConfirmModal({
+			title: "Delete your profile",
+			centered: true,
+			children: <Text size="sm">Estás seguro que querés eliminar este plan?</Text>,
+			labels: { confirm: "Eliminar", cancel: "Cancelar" },
+			confirmProps: { color: "red" },
+			onCancel: () => {
+				console.log("cancel");
+			},
+			onConfirm: () => {
+				const newSavedPlans = savedPlans.filter((plan) => plan.name !== nombre);
+				setSavedPlans(newSavedPlans);
+				setNombre(newSavedPlans[0].name);
+				setPlan(formatPlan(newSavedPlans[0].plan));
+			},
+		});
 	};
 
 	useEffect(() => {
@@ -162,7 +199,7 @@ export default function CreatePlan({}: Props) {
 							variant="default"
 							w={"150"}
 							onClick={() => {
-								setNombre("Nueva carrera");
+								setNombre("Nuevo plan");
 								setPlan([
 									{
 										nombre: "Primer año",
@@ -173,7 +210,7 @@ export default function CreatePlan({}: Props) {
 									return [
 										...savedPlans,
 										{
-											...parsePlan("Nueva carrera", [
+											...parsePlan("Nuevo plan", [
 												{
 													nombre: "Primer año",
 													materias: [{ ...nuevaMateria }],
@@ -193,18 +230,8 @@ export default function CreatePlan({}: Props) {
 								<Title order={2} className={styles.planTitle}>
 									{nombre}
 								</Title>
-								<Button
-									w={"fit-content"}
-									color="red"
-									variant="outline"
-									onClick={() => {
-										const newSavedPlans = savedPlans.filter((plan) => plan.name !== nombre);
-										setSavedPlans(newSavedPlans);
-										setNombre(newSavedPlans[0].name);
-										setPlan(formatPlan(newSavedPlans[0].plan));
-									}}
-								>
-									Eliminar carrera
+								<Button w={"fit-content"} color="red" variant="outline" onClick={deletePlan}>
+									Eliminar plan
 								</Button>
 							</Flex>
 
@@ -385,6 +412,7 @@ export default function CreatePlan({}: Props) {
 																					placeholder="Materias que se requieren para poder cursarla"
 																					value={item.requires}
 																					multiple
+																					searchable
 																					data={grouped}
 																					onChange={(value) => {
 																						if (!value) return;
