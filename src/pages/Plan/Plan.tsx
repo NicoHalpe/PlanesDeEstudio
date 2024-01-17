@@ -301,7 +301,7 @@ function PlanPage(): ReactElement {
 	useEffect(() => {
 		setNodes(years.concat(initialNodes));
 		setEdges(initialEdges);
-	}, [localPlans, selectedPlanName]);
+	}, [localPlans, selectedPlanName, localCheckedNodes]);
 
 	const [pathview, setPathview] = useState(true);
 	const [label, setLabel] = useState("Clickea en una materia para ver todas sus correlativas");
