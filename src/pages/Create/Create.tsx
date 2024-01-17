@@ -440,8 +440,9 @@ export default function CreatePlan({}: Props) {
 																					label="Cuatrimestre"
 																					value={item.cuatrimestre.toString()}
 																					data={[
-																						{ value: "1", label: "1" },
-																						{ value: "2", label: "2" },
+																						{ value: "1", label: "1er Cuatrimestre" },
+																						{ value: "2", label: "2do Cuatrimestre" },
+																						{ value: "3", label: "Anual" },
 																					]}
 																					onChange={(value) => {
 																						const cuatrimestre = parseInt(value || "1");

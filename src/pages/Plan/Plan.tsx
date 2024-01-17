@@ -439,7 +439,7 @@ function PlanPage(): ReactElement {
 			[selectedPlan.name]: nodesCheckedIDs,
 		});
 
-		setNodes(newNodes);
+		/* setNodes(newNodes); */
 	};
 
 	const navigate = useNavigate();

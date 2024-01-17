@@ -15,7 +15,7 @@ function CourseNode({ data, id }: NodeProps) {
 				className="nodrag"
 				style={{
 					filter: data.enabled ? "grayscale(0)" : "grayscale(0.6) brightness(0.8)",
-					width: "160px",
+					width: data.cuatrimestre === 3 ? "410px" : "160px",
 					minHeight: "40px",
 					height: "60px",
 					overflow: "hidden",

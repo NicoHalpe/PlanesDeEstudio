@@ -22,7 +22,16 @@ const parsePlans = (
 		Object.keys(plan).forEach((year, i) => {
 			const sorted = plan[year].sort((a, b) => a.cuatrimestre - b.cuatrimestre);
 
-			sorted.forEach((materia, j) => {
+			const materiasDelPrimerCuatrimestre = sorted.filter((m) => m.cuatrimestre === 1);
+			const materiasDelSegundoCuatrimestre = sorted.filter((m) => m.cuatrimestre === 2);
+			const materiasAnuales = sorted.filter((m) => m.cuatrimestre === 3);
+
+			const materiasCuatrimestrales = [
+				...materiasDelPrimerCuatrimestre,
+				...materiasDelSegundoCuatrimestre,
+			];
+
+			materiasCuatrimestrales.forEach((materia, j) => {
 				const cuatrimestre = materia.cuatrimestre - 1;
 				const materiasDelCuatrimestreAnterior = sorted.filter(
 					(m) => m.cuatrimestre === materia.cuatrimestre - 1
@@ -40,6 +49,29 @@ const parsePlans = (
 					position: {
 						x: 0 + 600 * i + 250 * cuatrimestre,
 						y: 100 + 100 * j - 100 * materiasDelCuatrimestreAnterior,
+					},
+				});
+			});
+
+			const actualRows = Math.max(
+				materiasDelPrimerCuatrimestre.length,
+				materiasDelSegundoCuatrimestre.length
+			);
+
+			materiasAnuales.forEach((materia, j) => {
+				parsedPlan.push({
+					id: `y${i + 1}-m${j + materiasCuatrimestrales.length + 1}`,
+					type: "course",
+					data: {
+						...materia,
+						background: materia.tituloIntermedio ? "rgb(241, 197, 152)" : "rgb(199, 214, 236)",
+						foreground: "#000",
+						year,
+						done: checkedNodes[name]?.includes(`y${i + 1}-m${j + 1}`) ?? false,
+					},
+					position: {
+						x: 0 + 600 * i,
+						y: 100 + 100 * actualRows + 100 * j,
 					},
 				});
 			});
