@@ -11,10 +11,22 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import CourseNode from "../../components/CourseNode";
 import YearNode from "../../components/YearNode";
-import { parsedPlans } from "../../constants";
+import { parsePlans, defaultPlans } from "../../constants";
 import { toPng } from "html-to-image";
 import { Materia, Plan, RawPlan, Year } from "../../types/Plan";
-import { Box, Select } from "@mantine/core";
+import {
+	ActionIcon,
+	Box,
+	ColorSchemeScript,
+	MantineContext,
+	MantineProvider,
+	MantineThemeContext,
+	Select,
+	Text,
+} from "@mantine/core";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocalStorage } from "@mantine/hooks";
+import { IconPlus } from "@tabler/icons-react";
 
 declare global {
 	interface Window {
@@ -42,11 +54,53 @@ const onInit = (
 };
 
 function PlanPage(): ReactElement {
-	const selectedPlanName = localStorage.getItem("selectedPlanName");
+	let [selectedPlanName, setSelectedPlanName] = useLocalStorage({
+		key: "selectedPlan",
+		defaultValue: "Licenciatura en Ciencias de Datos",
+		serialize(value) {
+			return JSON.stringify(value);
+		},
+		deserialize(value) {
+			return value ? JSON.parse(value) : "Licenciatura en Ciencias de Datos";
+		},
+		getInitialValueInEffect: false,
+	});
 
-	const [selectedPlan, setSelectedPlan] = useState<(typeof parsedPlans)[0]>(
-		parsedPlans.find((plan) => plan.name === selectedPlanName) || parsedPlans[0]
-	);
+	let [searchParams, setSearchParams] = useSearchParams();
+
+	const isPreview = searchParams.get("preview") !== null;
+
+	const previewPlanName = searchParams.get("preview-name");
+
+	const planName = previewPlanName || selectedPlanName;
+
+	const [localPlans, setLocalPlans] = useLocalStorage({
+		key: "plans",
+		defaultValue: defaultPlans,
+		serialize(value) {
+			return JSON.stringify(value);
+		},
+		deserialize(value) {
+			return value ? JSON.parse(value) : defaultPlans;
+		},
+		getInitialValueInEffect: false,
+	});
+
+	const [localCheckedNodes, setLocalCheckedNodes] = useLocalStorage({
+		key: "checkedNodes",
+		defaultValue: {},
+		serialize(value) {
+			return JSON.stringify(value);
+		},
+		deserialize(value) {
+			return value ? JSON.parse(value) : {};
+		},
+		getInitialValueInEffect: false,
+	});
+
+	const parsedPlans = parsePlans(localPlans, localCheckedNodes);
+
+	const selectedPlan = parsedPlans.find((plan) => plan.name === planName) || parsedPlans[0];
 
 	useEffect(() => {
 		document.title = selectedPlan.name + " - Plan de estudios";
@@ -247,7 +301,7 @@ function PlanPage(): ReactElement {
 	useEffect(() => {
 		setNodes(years.concat(initialNodes));
 		setEdges(initialEdges);
-	}, [selectedPlan]);
+	}, [localPlans]);
 
 	const [pathview, setPathview] = useState(true);
 	const [label, setLabel] = useState("Clickea en una materia para ver todas sus correlativas");
@@ -380,61 +434,51 @@ function PlanPage(): ReactElement {
 		const nodesChecked = newNodes.filter((node) => node.type === "course" && node.data.done);
 		let nodesCheckedIDs = nodesChecked.map((node) => node.id);
 
-		const rawCheckedNodes = window.localStorage.getItem("checkedNodes");
-
-		if (rawCheckedNodes) {
-			const parsedCheckedNodes = JSON.parse(rawCheckedNodes) as { [key: string]: string[] };
-			parsedCheckedNodes[selectedPlan.name] = nodesCheckedIDs;
-			window.localStorage.setItem("checkedNodes", JSON.stringify(parsedCheckedNodes));
-		} else {
-			const checkedNodes = {} as { [key: string]: string[] };
-			checkedNodes[selectedPlan.name] = nodesCheckedIDs;
-			window.localStorage.setItem("checkedNodes", JSON.stringify(checkedNodes));
-		}
+		setLocalCheckedNodes({
+			...localCheckedNodes,
+			[selectedPlan.name]: nodesCheckedIDs,
+		});
 
 		setNodes(newNodes);
 	};
 
+	const navigate = useNavigate();
+
 	return (
 		<div className="App">
-			<div
-				style={{
-					position: "absolute",
-					top: "40px",
-					width: "100vw",
-					zIndex: 11,
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					gap: "20px",
-					color: "#aaa",
-					fontFamily: '"Inter", sans-serif',
-				}}
-			>
-				<Box
-					w={"350px"}
-					style={{
-						textAlign: "start",
-					}}
-					className="mantine"
-				>
-					<Select
-						mb="sm"
-						label="Carrera:"
-						data={parsedPlans.map((plan) => plan.name)}
-						value={selectedPlan.name}
-						onChange={(value) => {
-							const plan = parsedPlans.find((plan) => plan.name === value);
-							if (plan) {
-								const selected = parsedPlans.find((plan) => plan.name === value);
-								if (!selected) return;
-								setSelectedPlan(selected);
-								localStorage.setItem("selectedPlanName", selected.name);
-							}
-						}}
-					/>
-				</Box>
+			<div className="label-wrapper">
+				{!isPreview ? (
+					<Box className="mantine select-wrapper">
+						<Select
+							w={"420px"}
+							mb="sm"
+							data={parsedPlans.map((plan) => plan.name)}
+							value={selectedPlan.name}
+							onChange={(value) => {
+								const plan = parsedPlans.find((plan) => plan.name === value);
+								if (plan) {
+									const selected = parsedPlans.find((plan) => plan.name === value);
+									if (!selected) return;
+									setSelectedPlanName(selected.name);
+								}
+							}}
+						/>
+
+						<ActionIcon
+							size={"36px"}
+							variant="default"
+							onClick={() => {
+								navigate("/create");
+							}}
+						>
+							<IconPlus style={{ width: "70%", height: "70%" }} stroke={1} />
+						</ActionIcon>
+					</Box>
+				) : (
+					<Box className="mantine preview-wrapper">
+						<Text size="sm">Preview: {planName}</Text>
+					</Box>
+				)}
 
 				<div
 					style={{
@@ -519,6 +563,7 @@ function PlanPage(): ReactElement {
 				onNodeClick={nodeClick}
 				onNodeMouseEnter={nodeMouseEnter}
 				onNodeMouseLeave={nodeMouseLeave}
+				minZoom={0.1}
 			>
 				<Controls
 					style={{

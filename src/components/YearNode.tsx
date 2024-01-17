@@ -4,6 +4,7 @@ function YearNode({ data }: NodeProps) {
 	return (
 		<>
 			<div
+				className="nodrag"
 				style={{
 					width: "160px",
 					minHeight: "40px",
