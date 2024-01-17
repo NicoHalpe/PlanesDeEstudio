@@ -15,7 +15,6 @@ import { parsedPlans } from "../../constants";
 import { toPng } from "html-to-image";
 import { Materia, Plan, RawPlan, Year } from "../../types/Plan";
 import { Box, Select } from "@mantine/core";
-import formatPlan from "../../utils/formatPlan";
 
 const nodeTypes: {
 	[key: string]: ComponentType<NodeProps>;
@@ -37,7 +36,15 @@ const onInit = (
 };
 
 function PlanPage(): ReactElement {
-	const [selectedPlan, setSelectedPlan] = useState<(typeof parsedPlans)[0]>(parsedPlans[0]);
+	const selectedPlanName = localStorage.getItem("selectedPlanName");
+
+	const [selectedPlan, setSelectedPlan] = useState<(typeof parsedPlans)[0]>(
+		parsedPlans.find((plan) => plan.name === selectedPlanName) || parsedPlans[0]
+	);
+
+	useEffect(() => {
+		document.title = selectedPlan.name + " - Plan de estudios";
+	}, [selectedPlan]);
 
 	const initialNodes = selectedPlan.plan;
 	const initialEdges = selectedPlan.edges;
@@ -413,6 +420,7 @@ function PlanPage(): ReactElement {
 								const selected = parsedPlans.find((plan) => plan.name === value);
 								if (!selected) return;
 								setSelectedPlan(selected);
+								localStorage.setItem("selectedPlanName", selected.name);
 							}
 						}}
 					/>
