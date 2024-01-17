@@ -189,9 +189,12 @@ export default function CreatePlan({}: Props) {
 					</Flex>
 					<Paper shadow="sm" withBorder p="xl">
 						<Stack>
-							<Flex align="center" justify="space-between">
-								<Title order={2}>{nombre}</Title>
+							<Flex align="center" justify="space-between" gap="xl">
+								<Title order={2} className={styles.planTitle}>
+									{nombre}
+								</Title>
 								<Button
+									w={"fit-content"}
 									color="red"
 									variant="outline"
 									onClick={() => {
