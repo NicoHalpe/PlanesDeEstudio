@@ -5,10 +5,13 @@ function CourseNode({ data, id }: NodeProps) {
 		<>
 			{data.hasLeft ? <Handle type="target" position={Position.Left} /> : null}
 			<div
+				className="nodrag"
 				style={{
 					filter: data.enabled ? "grayscale(0)" : "grayscale(0.6) brightness(0.8)",
 					width: "160px",
 					minHeight: "40px",
+					height: "60px",
+					overflow: "hidden",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
@@ -20,12 +23,13 @@ function CourseNode({ data, id }: NodeProps) {
 					border: "1px solid #000",
 					fontFamily: '"Inter", sans-serif',
 					fontSize: "14px",
+					cursor: "pointer",
 				}}
 			>
-				{data.label}
+				<span>{data.label}</span>
 				{data.enabled && (
 					<input
-						className="nodrag"
+						className="noclick"
 						type="checkbox"
 						onChange={(e) => data.onCheck?.(e, id)}
 						checked={data.done}

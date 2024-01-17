@@ -16,6 +16,12 @@ import { toPng } from "html-to-image";
 import { Materia, Plan, RawPlan, Year } from "../../types/Plan";
 import { Box, Select } from "@mantine/core";
 
+declare global {
+	interface Window {
+		preventFitView: boolean;
+	}
+}
+
 const nodeTypes: {
 	[key: string]: ComponentType<NodeProps>;
 } = { course: CourseNode, year: YearNode };
@@ -262,7 +268,10 @@ function PlanPage(): ReactElement {
 
 	const nodeClick: NodeMouseHandler = (event, element): void => {
 		if (element.type === "course") {
-			if ((event.target as HTMLElement).nodeName === "INPUT") return;
+			if ((event.target as HTMLElement).classList.contains("noclick")) {
+				window.preventFitView = true;
+				return;
+			}
 			if (clickedCourse !== element.id) {
 				setClickedCourse(element.id);
 				updateNodes(element.id, true);
@@ -330,9 +339,10 @@ function PlanPage(): ReactElement {
 	};
 
 	useEffect(() => {
-		if (reactFlowInstance) {
+		if (reactFlowInstance && !window.preventFitView) {
 			reactFlowInstance.fitView({ duration: 800, padding: 0.1, center: true });
 		}
+		window.preventFitView = false;
 	}, [nodes, reactFlowInstance]);
 
 	const handleNodeCheck = (event: MouseEvent, id: string): void => {
@@ -441,114 +451,43 @@ function PlanPage(): ReactElement {
 				</div>
 			</div>
 
-			<div
-				style={{
-					position: "absolute",
-					bottom: "20px",
-					width: "100vw",
-					zIndex: 11,
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					color: "#aaa",
-					fontFamily: '"Inter", sans-serif',
-				}}
-			>
+			<div className="colorType-wrapper">
 				<div
-					style={{
-						backgroundColor: "#1E1E1E",
-						padding: "2px",
-						borderRadius: "5px",
-						width: "auto",
-						height: "auto",
-						zIndex: 20,
-						fontFamily: '"Inter", sans-serif',
-						color: "white",
-						display: "flex",
-						alignItems: "center",
-						gap: "40px",
-						textDecoration: "none !important",
+					className="colorType-container"
+					onClick={() => {
+						const backgroundColor = "rgb(241, 197, 152)";
+						const nodes = filterNodesByBackground(backgroundColor);
+						setNodes(nodes);
+					}}
+					onMouseOver={() => {
+						setLabel("Clickea para ver las materias del Título intermedio");
 					}}
 				>
 					<div
+						className="colorCircle"
 						style={{
-							display: "flex",
-							alignItems: "center",
-							gap: "10px",
-							cursor: "pointer",
+							backgroundColor: "rgb(241, 197, 152)",
 						}}
-						onClick={() => {
-							const backgroundColor = "#D9B600";
-							const nodes = filterNodesByBackground(backgroundColor);
-							setNodes(nodes);
-						}}
-						onMouseOver={() => {
-							setLabel("Clickea para ver las materias del CBC");
-						}}
-					>
-						<div
-							style={{
-								width: "15px",
-								height: "15px",
-								borderRadius: "50%",
-								backgroundColor: "#D9B600",
-							}}
-						/>
-						<span>CBC</span>
-					</div>
+					/>
+					<span className={"colorType"}>Título intermedio</span>
+				</div>
 
+				<div
+					className="colorType-container"
+					onClick={() => {
+						reset();
+					}}
+					onMouseOver={() => {
+						setLabel("Clickea para ver las materias del Título completo");
+					}}
+				>
 					<div
+						className="colorCircle"
 						style={{
-							display: "flex",
-							alignItems: "center",
-							gap: "10px",
-							cursor: "pointer",
+							backgroundColor: "rgb(199, 214, 236)",
 						}}
-						onClick={() => {
-							const backgroundColor = "rgb(241, 197, 152)";
-							const nodes = filterNodesByBackground(backgroundColor);
-							setNodes(nodes);
-						}}
-						onMouseOver={() => {
-							setLabel("Clickea para ver las materias del Título intermedio");
-						}}
-					>
-						<div
-							style={{
-								width: "15px",
-								height: "15px",
-								borderRadius: "50%",
-								backgroundColor: "rgb(241, 197, 152)",
-							}}
-						/>
-						<span>Título intermedio</span>
-					</div>
-
-					<div
-						style={{
-							display: "flex",
-							alignItems: "center",
-							gap: "10px",
-							cursor: "pointer",
-						}}
-						onClick={() => {
-							/* show all nodes */
-							reset();
-						}}
-						onMouseOver={() => {
-							setLabel("Clickea para ver las materias del Título completo");
-						}}
-					>
-						<div
-							style={{
-								width: "15px",
-								height: "15px",
-								borderRadius: "50%",
-								backgroundColor: "rgb(199, 214, 236)",
-							}}
-						/>
-						<span>Título completo</span>
-					</div>
+					/>
+					<span className={"colorType"}>Título completo</span>
 				</div>
 			</div>
 

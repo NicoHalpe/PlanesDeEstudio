@@ -1,40 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 .App {
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: #1E1E1E;
+	text-align: center;
+	width: 100vw;
+	height: 100dvh;
+	background-color: #1e1e1e;
 }
 
-.App *:not(.mantine *), .App *::before, .App *::after {
-  box-sizing: content-box;
+.App *:not(.mantine *),
+.App *::before,
+.App *::after {
+	box-sizing: content-box;
 }
 
 .react-flow__controls,
 .react-flow__controls-button {
-  background-color: #181818 !important;
-  color: #4A4A4A !important;
+	background-color: #181818 !important;
+	color: #4a4a4a !important;
 }
 
 .react-flow__controls-button {
-  border: 1px solid #4A4A4A !important;
+	border: 1px solid #4a4a4a !important;
 }
 
 .react-flow__controls-button svg path {
-  fill: #4A4A4A !important;
+	fill: #4a4a4a !important;
 }
 
 a {
-  text-decoration: none;
-  color: "#FFDD55" !important;
+	text-decoration: none;
+	color: "#FFDD55" !important;
 }
 
 a:visited {
-  text-decoration: none;
-  color:"#FFDD55" !important;
+	text-decoration: none;
+	color: "#FFDD55" !important;
 }
 
-.react-flow__attribution{
-  display: none;
+.react-flow__attribution {
+	display: none;
+}
+
+.colorType-wrapper {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+
+	background-color: #1e1e1e;
+	padding: 2px;
+	border-radius: 5px;
+	width: auto;
+	height: auto;
+	z-index: 20;
+	font-family: "Inter", sans-serif;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: clamp(15px, 1vw, 40px);
+	text-decoration: none !important;
+}
+
+.colorType-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: clamp(5px, 1vw, 10px);
+}
+
+.colorCircle {
+	width: clamp(10px, 1vw, 15px);
+	height: clamp(10px, 1vw, 15px);
+	border-radius: 50%;
+}
+
+.colorType {
+	font-size: clamp(0.8rem, 1.5vw, 1rem);
+	white-space: nowrap;
 }
