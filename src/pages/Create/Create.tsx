@@ -7,10 +7,10 @@ import {
 	Button,
 	Center,
 	Checkbox,
-	ColorInput,
 	Container,
 	Flex,
 	Grid,
+	JsonInput,
 	Modal,
 	MultiSelect,
 	Paper,
@@ -19,7 +19,6 @@ import {
 	Text,
 	TextInput,
 	Title,
-	Tooltip,
 } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 
@@ -104,7 +103,9 @@ export default function CreatePlan({}: Props) {
 		setSelectedPlanName(nombre);
 	}, [nombre]);
 
-	const [modalOpened, setModalOpened] = React.useState(false);
+	const [exportModalOpened, setExportModalOpened] = useState(false);
+	const [importModalOpened, setImportModalOpened] = useState(false);
+	const [JSONImport, setJSONImport] = useState("");
 
 	const nombresMaterias = plan.flatMap((año) =>
 		año.materias.map((materia) => ({ nombre: materia.label, año: año.nombre }))
@@ -132,12 +133,12 @@ export default function CreatePlan({}: Props) {
 
 		setSavedPlans(updatedPlans);
 
-		setModalOpened(true);
+		setExportModalOpened(true);
 	};
 
 	const deletePlan = () => {
 		modals.openConfirmModal({
-			title: "Delete your profile",
+			title: "Eliminar plan",
 			centered: true,
 			children: <Text size="sm">Estás seguro que querés eliminar este plan?</Text>,
 			labels: { confirm: "Eliminar", cancel: "Cancelar" },
@@ -169,10 +170,89 @@ export default function CreatePlan({}: Props) {
 
 	const isSmallScreen = useMediaQuery("(max-width: 1250px)");
 
+	const handleImport = () => {
+		try {
+			const jsonValue = JSON.parse(JSONImport);
+
+			if (!jsonValue.name || !jsonValue.plan) return;
+
+			const formattedPlan = formatPlan(jsonValue.plan);
+
+			const parsedPlan = parsePlan(jsonValue.name, formattedPlan);
+
+			const planNameExists = savedPlans.findIndex((plan) => plan.name === jsonValue.name);
+
+			const newPlans = [...savedPlans];
+
+			if (planNameExists !== -1) {
+				modals.openConfirmModal({
+					title: "Ya existe un plan con ese nombre",
+					centered: true,
+					children: (
+						<Text size="sm">Estás por sobrescribir un plan ya existente. ¿Estás seguro?</Text>
+					),
+					labels: { confirm: "Confirmar", cancel: "Cancelar" },
+					confirmProps: { color: "red" },
+					onCancel: () => {
+						console.log("cancel");
+					},
+					onConfirm: () => {
+						newPlans[planNameExists] = parsedPlan;
+
+						setSavedPlans(newPlans);
+						setSelectedPlanName(jsonValue.name);
+						setPlan(formattedPlan);
+						setNombre(jsonValue.name);
+
+						setImportModalOpened(false);
+					},
+				});
+			} else {
+				newPlans.push(parsedPlan);
+
+				setSavedPlans(newPlans);
+				setSelectedPlanName(jsonValue.name);
+				setPlan(formattedPlan);
+				setNombre(jsonValue.name);
+
+				setImportModalOpened(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
-			<Modal opened={modalOpened} onClose={() => setModalOpened(false)} title={nombre} size="xl">
+			<Modal
+				opened={exportModalOpened}
+				onClose={() => setExportModalOpened(false)}
+				title={nombre}
+				size="xl"
+			>
 				<CodeHighlight language="json" code={JSON.stringify(parsePlan(nombre, plan), null, 4)} />
+			</Modal>
+			<Modal
+				opened={importModalOpened}
+				onClose={() => setImportModalOpened(false)}
+				title={nombre}
+				size="xl"
+			>
+				<JsonInput
+					label="Importar plan"
+					placeholder="Pegar el JSON del plan de estudios"
+					autosize
+					maxRows={30}
+					formatOnBlur
+					onChange={(value) => {
+						if (!value) return;
+						setJSONImport(value);
+					}}
+				/>
+
+				<Button color="blue" onClick={handleImport} mt={"sm"} fullWidth>
+					Importar
+				</Button>
 			</Modal>
 			<Flex gap={"0"} className={styles.fullWrapper}>
 				<Container size="md" p="xl" ml={isSmallScreen ? undefined : "0"} w={"100%"} h={"100%"}>
@@ -180,6 +260,7 @@ export default function CreatePlan({}: Props) {
 						{savedPlans && (
 							<Select
 								w={"100%"}
+								flex={"1"}
 								label="Seleccionar plan de estudios"
 								data={savedPlans.map((plan) => plan.name)}
 								value={nombre}
@@ -197,7 +278,7 @@ export default function CreatePlan({}: Props) {
 
 						<Button
 							variant="default"
-							w={"150"}
+							w="110"
 							onClick={() => {
 								setNombre("Nuevo plan");
 								setPlan([
@@ -221,7 +302,11 @@ export default function CreatePlan({}: Props) {
 								});
 							}}
 						>
-							Crear plan
+							Nuevo
+						</Button>
+
+						<Button w="110" variant="default" onClick={() => setImportModalOpened(true)}>
+							Importar
 						</Button>
 					</Flex>
 					<Paper shadow="sm" withBorder p="xl">
@@ -480,17 +565,9 @@ export default function CreatePlan({}: Props) {
 								</Stack>
 							</Paper>
 
-							<Flex gap={"md"}>
-								<Button color="grape" fullWidth onClick={createPlan}>
-									Exportar plan
-								</Button>
-
-								<Tooltip label="Próximamente" position="bottom">
-									<Button color="pink" fullWidth disabled>
-										Importar un plan
-									</Button>
-								</Tooltip>
-							</Flex>
+							<Button color="grape" fullWidth onClick={createPlan}>
+								Exportar plan
+							</Button>
 
 							{isSmallScreen && (
 								<iframe

@@ -1,6 +1,14 @@
-import { Handle, NodeProps, Position } from "react-flow-renderer";
+import { useEffect } from "react";
+import { Handle, NodeProps, Position, useUpdateNodeInternals } from "react-flow-renderer";
+import { useNodeId } from "reactflow";
 
 function CourseNode({ data, id }: NodeProps) {
+	const updateNodeInternals = useUpdateNodeInternals();
+
+	useEffect(() => {
+		updateNodeInternals(id);
+	}, [data, id, updateNodeInternals]);
+
 	return (
 		<>
 			{data.hasLeft ? <Handle type="target" position={Position.Left} /> : null}
