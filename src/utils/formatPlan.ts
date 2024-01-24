@@ -5,6 +5,7 @@ const formatPlan = (plan: RawPlan) => {
 
 	Object.keys(plan).forEach((año) => {
 		formattedPlan.push({
+			id: Math.random().toString(36).substr(2, 9),
 			nombre: año,
 			materias: plan[año],
 		});

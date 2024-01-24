@@ -32,3 +32,10 @@
 		flex-direction: column;
 	}
 }
+
+.verticalGrid {
+	display: grid;
+	grid-auto-rows: max-content;
+	grid-template-columns: 1fr;
+	grid-gap: 10px;
+}

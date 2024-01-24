@@ -52,6 +52,7 @@ type Node = {
 type Plan = Materia[];
 
 type FormPlan = {
+	id: string;
 	nombre: string;
 	materias: RawMateria[];
 }[];
