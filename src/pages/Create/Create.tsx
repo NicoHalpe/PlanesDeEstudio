@@ -21,7 +21,7 @@ import {
 	TextInput,
 	Title,
 } from "@mantine/core";
-import { IconGripVertical, IconTrash } from "@tabler/icons-react";
+import { IconArrowLeft, IconGripVertical, IconTrash } from "@tabler/icons-react";
 
 import styles from "./Create.module.css";
 import { CodeHighlight } from "@mantine/code-highlight";
@@ -305,8 +305,18 @@ export default function CreatePlan({}: Props) {
 					Importar
 				</Button>
 			</Modal>
+
 			<Flex gap={"0"} className={styles.fullWrapper}>
 				<Container size="md" p="xl" ml={isSmallScreen ? undefined : "0"} w={"100%"} h={"100%"}>
+					<Button
+						variant="default"
+						mb={"md"}
+						onClick={() => (window.location.href = "/")}
+						leftSection={<IconArrowLeft size={20} />}
+					>
+						Volver
+					</Button>
+
 					<Flex align="end" gap="sm" w="100%" mb={"sm"}>
 						{savedPlans && (
 							<Select
