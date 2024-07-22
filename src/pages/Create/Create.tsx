@@ -175,13 +175,14 @@ export default function CreatePlan({}: Props) {
 		const parsedPlan = parsePlan(nombre, plan);
 
 		const updatedPlans = savedPlans.map((plan: { name: string; plan: RawPlan }) => {
-			if (plan.name === nombre) {
+			if (plan.name === selectedPlanName) {
 				return parsedPlan;
 			}
 			return plan;
 		});
 
 		setSavedPlans(updatedPlans);
+		setSelectedPlanName(nombre);
 	}, [plan, nombre]);
 
 	const isSmallScreen = useMediaQuery("(max-width: 1250px)");
