@@ -2,13 +2,21 @@ import { MarkerType } from "react-flow-renderer";
 import { RawPlan, Plan, Edge, Year } from "./types/Plan";
 import defaultPlans from "./defaultPlans.json";
 
-/* const localPlans = localStorage.getItem("plans");
+const localPlans = localStorage.getItem("plans");
 const plans: {
 	name: string;
 	plan: RawPlan;
 }[] = localPlans ? JSON.parse(localPlans) : defaultPlans;
 
-const localCheckedNodes = window.localStorage.getItem("checkedNodes");
+defaultPlans.forEach((defaultPlan) => {
+	if (!plans.find((plan) => plan.name === defaultPlan.name)) {
+		plans.push(defaultPlan);
+	}
+});
+
+localStorage.setItem("plans", JSON.stringify(plans));
+
+/* const localCheckedNodes = window.localStorage.getItem("checkedNodes");
 const checkedNodes = localCheckedNodes ? JSON.parse(localCheckedNodes) : [];
 
 localStorage.setItem("plans", JSON.stringify(plans)); */

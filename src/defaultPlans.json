@@ -459,5 +459,291 @@
                 }
             ]
         }
+    },
+    {
+        "name": "Lic. Analisis de Sistemas (Plan sugerido)",
+        "plan": {
+            "CBC": [
+                {
+                    "label": "IPC",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "label": "ICSE",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "label": "Analisis",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "label": "Algebra",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": []
+                },
+                {
+                    "label": "Fisica",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": []
+                },
+                {
+                    "label": "PC",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": []
+                }
+            ],
+            "1er Año": [
+                {
+                    "label": "Análisis Matemático II (81.01)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "label": "Álgebra II (81.02)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "label": "Algoritmos y Programación I (95.14)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "label": "Matemática Discreta (81.11)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "CBC"
+                    ]
+                },
+                {
+                    "label": "Organización del Computador (95.57)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algoritmos y Programación I (95.14)"
+                    ]
+                },
+                {
+                    "label": "Algoritmos y Programación II (95.15)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algoritmos y Programación I (95.14)"
+                    ]
+                }
+            ],
+            "2do Año": [
+                {
+                    "label": "Probabilidad y Estadística B (81.04)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Análisis Matemático II (81.01)",
+                        "Álgebra II (81.02)"
+                    ]
+                },
+                {
+                    "label": "Estructuras y Procesos Organizacionales (91.39)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "label": "Organización de Datos  (95.58)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Organización del Computador (95.57)",
+                        "Algoritmos y Programación II (95.15)"
+                    ]
+                },
+                {
+                    "label": "Algoritmos y Programación III (95.02)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Algoritmos y Programación II (95.15)"
+                    ]
+                },
+                {
+                    "label": "Economía de las Organizaciones (91.41)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Probabilidad y Estadística B (81.04)",
+                        "Estructuras y Procesos Organizacionales (91.39)"
+                    ]
+                },
+                {
+                    "label": "Sistemas Operativos (95.03)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Organización de Datos  (95.58)"
+                    ]
+                },
+                {
+                    "label": "Métodos y Modelos en la Ingeniería de Software I (95.20)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algoritmos y Programación III (95.02)",
+                        "Organización de Datos  (95.58)"
+                    ]
+                },
+                {
+                    "label": "Taller de Programación (95.08)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Algoritmos y Programación III (95.02)",
+                        "Organización del Computador (95.57)"
+                    ]
+                },
+                {
+                    "label": "Electivas",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                }
+            ],
+            "3er Año": [
+                {
+                    "label": "Modelos y Optimizaciones II (91.04)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Análisis Matemático II (81.01)",
+                        "Álgebra II (81.02)",
+                        "Matemática Discreta (81.11)",
+                        "Algoritmos y Programación II (95.15)"
+                    ]
+                },
+                {
+                    "label": "Métodos y Modelos en la Ingeniería de Software II (95.21)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Métodos y Modelos en la Ingeniería de Software I (95.20)"
+                    ]
+                },
+                {
+                    "label": "Base de Datos (95.05)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Métodos y Modelos en la Ingeniería de Software I (95.20)"
+                    ]
+                },
+                {
+                    "label": "Administración de las Organizaciones (91.42)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Economía de las Organizaciones (91.41)",
+                        "Métodos y Modelos en la Ingeniería de Software I (95.20)"
+                    ]
+                },
+                {
+                    "label": "Electivas",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "label": "Modelos y Optimización II (91.05)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Probabilidad y Estadística B (81.04)",
+                        "Modelos y Optimizaciones II (91.04)"
+                    ]
+                },
+                {
+                    "label": "Administración y Control de Proyectos Informáticos I (95.24)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Administración de las Organizaciones (91.42)",
+                        "Métodos y Modelos en la Ingeniería de Software II (95.21)"
+                    ]
+                },
+                {
+                    "label": "Diseño, Operación y Gestión de Servicios Informáticos (95.59)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Administración de las Organizaciones (91.42)",
+                        "Métodos y Modelos en la Ingeniería de Software II (95.21)"
+                    ]
+                },
+                {
+                    "label": "Redes y Aplicaciones Distribuidas (95.60)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Base de Datos (95.05)",
+                        "Sistemas Operativos (95.03)"
+                    ]
+                },
+                {
+                    "label": "Electivas",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": []
+                }
+            ],
+            "4to Año": [
+                {
+                    "label": "Trabajo Profesional de Licenciatura en Análisis de Sistemas (95.61)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Administración y Control de Proyectos Informáticos I (95.24)",
+                        "Diseño, Operación y Gestión de Servicios Informáticos (95.59)",
+                        "Redes y Aplicaciones Distribuidas (95.60)"
+                    ]
+                },
+                {
+                    "label": "Legislación y Ejercicio Profesional en Sistemas e Informática (91.40)",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                },
+                {
+                    "label": "Estándares de Calidad y Modelos de Referencia",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": [
+                        "Administración y Control de Proyectos Informáticos I (95.24)"
+                    ]
+                },
+                {
+                    "label": "Electivas",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 1,
+                    "requires": []
+                }
+            ]
+        }
     }
 ]
