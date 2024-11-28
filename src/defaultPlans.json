@@ -249,7 +249,9 @@
                     "requires": [
                         "CBC"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Introducci%C3%B3n_a_la_Programaci%C3%B3n"
                 },
                 {
                     "label": "Álgebra I",
@@ -259,7 +261,9 @@
                     "requires": [
                         "CBC"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/%C3%81lgebra_I"
                 },
                 {
                     "label": "Algoritmos y Estructuras de Datos",
@@ -271,7 +275,9 @@
                         "Álgebra I",
                         "CBC"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 15,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Algoritmos_y_Estructuras_de_Datos"
                 },
                 {
                     "label": "Análisis I",
@@ -281,7 +287,9 @@
                     "requires": [
                         "CBC"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/An%C3%A1lisis_I"
                 }
             ],
             "2do Año": [
@@ -293,7 +301,9 @@
                     "requires": [
                         "Algoritmos y Estructuras de Datos"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Paradigmas_de_Programaci%C3%B3n"
                 },
                 {
                     "label": "Técnicas de Diseño de Algoritmos",
@@ -303,7 +313,9 @@
                     "requires": [
                         "Algoritmos y Estructuras de Datos"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/T%C3%A9cnicas_de_Dise%C3%B1o_de_Algoritmos"
                 },
                 {
                     "label": "Sistemas Digitales",
@@ -313,7 +325,9 @@
                     "requires": [
                         "Introducción a la Programación"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 5,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Sistemas_Digitales"
                 },
                 {
                     "label": "Ingeniería de Software",
@@ -323,7 +337,9 @@
                     "requires": [
                         "Paradigmas de Programación"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Ingenier%C3%ADa_de_Software"
                 },
                 {
                     "label": "Lenguajes Formales, Autómatas y Computabilidad",
@@ -333,7 +349,9 @@
                     "requires": [
                         "Algoritmos y Estructuras de Datos"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 5,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Lenguajes_Formales,_Aut%C3%B3matas_y_Computabilidad"
                 },
                 {
                     "label": "Arquitectura y Organización de Computadores",
@@ -343,7 +361,9 @@
                     "requires": [
                         "Sistemas Digitales"
                     ],
-                    "tituloIntermedio": true
+                    "tituloIntermedio": true,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Arquitectura_y_Organizaci%C3%B3n_de_Computadores"
                 }
             ],
             "3er Año": [
@@ -356,7 +376,9 @@
                         "Algoritmos y Estructuras de Datos",
                         "Álgebra I"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/%C3%81lgebra_Lineal_Computacional"
                 },
                 {
                     "label": "Complejidad Computacional",
@@ -367,7 +389,9 @@
                         "Técnicas de Diseño de Algoritmos",
                         "Lenguajes Formales, Autómatas y Computabilidad"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 5,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Complejidad_Computacional"
                 },
                 {
                     "label": "Sistemas Operativos",
@@ -377,7 +401,9 @@
                     "requires": [
                         "Arquitectura y Organización de Computadores"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Sistemas_Operativos_(plan_2023)"
                 },
                 {
                     "label": "Estadística Computacional",
@@ -388,7 +414,9 @@
                         "Algebra Lineal Computacional",
                         "Análisis I"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Estad%C3%ADstica_Computacional"
                 },
                 {
                     "label": "Almacenamiento y recuperación de la información",
@@ -398,7 +426,9 @@
                     "requires": [
                         "Ingeniería de Software"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Almacenamiento_y_Recuperaci%C3%B3n_de_la_Informaci%C3%B3n"
                 },
                 {
                     "label": "Optativas 1 (4 créditos)",
@@ -406,7 +436,8 @@
                     "foreground": "#000",
                     "cuatrimestre": 2,
                     "requires": [],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 80
                 }
             ],
             "4to Año": [
@@ -419,7 +450,9 @@
                         "Paradigmas de Programación",
                         "Sistemas Operativos"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Programaci%C3%B3n_Concurrente_y_Paralela"
                 },
                 {
                     "label": "Redes de Comunicaciones y Cómputo Distribuido",
@@ -431,7 +464,9 @@
                         "Sistemas Operativos",
                         "Estadística Computacional"
                     ],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 10,
+                    "externalLink": "https://www.cubawiki.com.ar/index.php/Redes_de_Comunicaciones_y_C%C3%B3mputo_Distribuido"
                 },
                 {
                     "label": "Optativas 2 (4 créditos)",
@@ -439,7 +474,17 @@
                     "foreground": "#000",
                     "cuatrimestre": 1,
                     "requires": [],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 80
+                },
+                {
+                    "label": "Seminario sobre Tecnología y Sociedad",
+                    "tituloIntermedio": false,
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Ingeniería de Software"
+                    ],
+                    "weekHours": 3
                 },
                 {
                     "label": "Trabajo Final - Tesis de Licenciatura",
@@ -455,7 +500,8 @@
                     "foreground": "#000",
                     "cuatrimestre": 2,
                     "requires": [],
-                    "tituloIntermedio": false
+                    "tituloIntermedio": false,
+                    "weekHours": 160
                 }
             ]
         }

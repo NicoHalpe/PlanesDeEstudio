@@ -1,19 +1,12 @@
-import React, { useEffect, useId, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
 	Accordion,
-	AccordionControlProps,
-	ActionIcon,
-	Box,
 	Button,
-	Center,
-	Checkbox,
 	Container,
 	FileInput,
 	Flex,
-	Grid,
 	JsonInput,
 	Modal,
-	MultiSelect,
 	Paper,
 	Select,
 	Stack,
@@ -21,7 +14,7 @@ import {
 	TextInput,
 	Title,
 } from "@mantine/core";
-import { IconArrowLeft, IconGripVertical, IconTrash } from "@tabler/icons-react";
+import { IconArrowLeft } from "@tabler/icons-react";
 
 import styles from "./Create.module.css";
 import { CodeHighlight } from "@mantine/code-highlight";
@@ -31,13 +24,13 @@ import parsePlan from "../../utils/parsePlan";
 import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import { defaultPlans } from "../../constants";
 import { modals } from "@mantine/modals";
-import { DndContext, useDraggable } from "@dnd-kit/core";
+import { DndContext } from "@dnd-kit/core";
 import {
 	SortableContext,
 	arrayMove,
-	useSortable,
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import AccordionYearItem from "../../components/AccordionYearItem";
 
 type Props = {};
 
@@ -47,26 +40,6 @@ const nuevaMateria = {
 	cuatrimestre: 1,
 	requires: [],
 };
-
-function AccordionControl(
-	props: AccordionControlProps & {
-		onIconClick: () => void;
-		showIcon: boolean;
-		dragHandle: React.ReactNode;
-	}
-) {
-	return (
-		<Center>
-			{props.dragHandle}
-			<Accordion.Control {...props} />
-			{props.showIcon && (
-				<ActionIcon size="lg" variant="subtle" color="red" mr="xs" onClick={props.onIconClick}>
-					<IconTrash style={{ width: "70%", height: "70%" }} stroke={1.5} />
-				</ActionIcon>
-			)}
-		</Center>
-	);
-}
 
 export default function CreatePlan({}: Props) {
 	const [savedPlans, setSavedPlans] = useLocalStorage<
@@ -108,7 +81,7 @@ export default function CreatePlan({}: Props) {
 					{
 						id: Math.random().toString(36).substr(2, 9),
 						nombre: "Primer año",
-						materias: [{ ...nuevaMateria }],
+						materias: [{ ...nuevaMateria, id: Math.random().toString(36).substr(2, 9) }],
 					},
 			  ]
 	);
@@ -346,7 +319,7 @@ export default function CreatePlan({}: Props) {
 									{
 										id: Math.random().toString(36).substr(2, 9),
 										nombre: "Primer año",
-										materias: [{ ...nuevaMateria }],
+										materias: [{ ...nuevaMateria, id: Math.random().toString(36).substr(2, 9) }],
 									},
 								]);
 								setSavedPlans(() => {
@@ -357,7 +330,7 @@ export default function CreatePlan({}: Props) {
 												{
 													id: Math.random().toString(36).substr(2, 9),
 													nombre: "Primer año",
-													materias: [{ ...nuevaMateria }],
+													materias: [{ ...nuevaMateria, id: Math.random().toString(36).substr(2, 9) }],
 												},
 											]),
 										},
@@ -403,7 +376,7 @@ export default function CreatePlan({}: Props) {
 										onChange={(year) => setActiveYear(year)}
 									>
 										<DndContext
-											/* onDragStart={(event) => setActiveId(event?.active?.id)} */
+											onDragStart={(event) => setActiveYear(null)}
 											onDragEnd={(event) => {
 												if (event?.active?.id !== event?.over?.id) {
 													const dragIndex = yearsOrder.findIndex(
@@ -428,7 +401,7 @@ export default function CreatePlan({}: Props) {
 											<SortableContext items={yearsOrder} strategy={verticalListSortingStrategy}>
 												{plan.map((año, i) => {
 													return (
-														<AccordioYearItem
+														<AccordionYearItem
 															key={"año-" + año.id}
 															año={año}
 															i={i}
@@ -452,7 +425,7 @@ export default function CreatePlan({}: Props) {
 												plan.push({
 													id: Math.random().toString(36).substr(2, 9),
 													nombre: "Nuevo año",
-													materias: [{ ...nuevaMateria }],
+													materias: [{ ...nuevaMateria, id: Math.random().toString(36).substr(2, 9) }],
 												});
 												return [...plan];
 											});
@@ -493,271 +466,3 @@ export default function CreatePlan({}: Props) {
 	);
 }
 
-import { CSS } from "@dnd-kit/utilities";
-import QRCode from "react-qr-code";
-
-const AccordioYearItem = ({
-	año,
-	i,
-	plan,
-	setPlan,
-	nombresWithoutDuplicates,
-	updateNombreMateria,
-	isOpened,
-}: {
-	año: FormPlan[0];
-	i: number;
-	plan: FormPlan;
-	setPlan: React.Dispatch<React.SetStateAction<FormPlan>>;
-	nombresWithoutDuplicates: { nombre: string; año: string }[];
-	updateNombreMateria: (añoIndex: number, materiaIndex: number, nombre: string) => void;
-	isOpened: boolean;
-}) => {
-	const { listeners, attributes, setNodeRef, transition, transform, active } = useSortable({
-		id: año.id,
-	});
-
-	const isActive = active?.id === año.id;
-
-	const style = {
-		transition,
-		transform: CSS.Transform.toString(transform),
-		opacity: isActive ? 0.8 : 1,
-	};
-
-	const deleteMateria = (onConfirm: () => void) =>
-		modals.openConfirmModal({
-			title: "Eliminar materia",
-			centered: true,
-			children: <Text size="sm">¿Estás seguro que querés eliminar esta materia?</Text>,
-			labels: { confirm: "Eliminar", cancel: "Cancelar" },
-			confirmProps: { color: "red" },
-			onCancel: () => {
-				console.log("cancel");
-			},
-			onConfirm: () => {
-				onConfirm();
-			},
-		});
-
-	const deleteYear = (onConfirm: () => void) =>
-		modals.openConfirmModal({
-			title: "Eliminar año",
-			centered: true,
-			children: <Text size="sm">¿Estás seguro que querés eliminar este año?</Text>,
-			labels: { confirm: "Eliminar", cancel: "Cancelar" },
-			confirmProps: { color: "red" },
-			onCancel: () => {
-				console.log("cancel");
-			},
-			onConfirm,
-		});
-
-	return (
-		<Accordion.Item value={año.id} key={i} ref={setNodeRef} style={style}>
-			<AccordionControl
-				showIcon={plan.length > 1}
-				onIconClick={() => {
-					deleteYear(() =>
-						setPlan((plan) => {
-							plan.splice(i, 1);
-							return [...plan];
-						})
-					);
-				}}
-				dragHandle={
-					<ActionIcon variant="subtle" color="white" ml={"xs"} {...listeners} {...attributes}>
-						<IconGripVertical />
-					</ActionIcon>
-				}
-			>
-				{año.nombre || "-"}
-			</AccordionControl>
-			<Accordion.Panel>
-				<Stack gap="md">
-					<TextInput
-						label="Nombre"
-						value={año.nombre}
-						onChange={(e) => {
-							const nombre = e.currentTarget.value;
-							setPlan((plan) => {
-								plan[i].nombre = nombre;
-								return [...plan];
-							});
-						}}
-					/>
-
-					<span>Materias</span>
-
-					{isOpened &&
-						año.materias.map((item, materiaIndex) => {
-							const requiresOptions = nombresWithoutDuplicates
-								.filter((materia) => materia.nombre !== item.label)
-								.map((materia) => ({
-									value: materia.nombre,
-									label: materia.nombre,
-									group: materia.año,
-								}));
-
-							const grouped = requiresOptions.reduce(
-								(prev, curr, currIndex) => {
-									const group = curr.group;
-									const exists = prev.find((item) => item.group === group);
-									if (exists) {
-										exists.items.push(curr.label);
-									} else {
-										prev.push({
-											group,
-											items: [group + " (Completo)", curr.label],
-										});
-									}
-									return prev;
-								},
-								[] as {
-									group: string;
-									items: string[];
-								}[]
-							);
-
-							return (
-								<Paper
-									shadow="xs"
-									p="lg"
-									withBorder
-									bg={"var(--mantine-color-dark-6)"}
-									key={"materia-" + materiaIndex}
-								>
-									<Flex align="center" justify="space-between" mb="md">
-										<Title order={4}>{item.label}</Title>
-										{año.materias.length > 1 && (
-											<ActionIcon
-												color="red"
-												onClick={() => {
-													deleteMateria(() =>
-														setPlan((plan) => {
-															plan[i].materias.splice(plan[i].materias.indexOf(item), 1);
-															return [...plan];
-														})
-													);
-												}}
-											>
-												<IconTrash style={{ width: "70%", height: "70%" }} stroke={1.5} />
-											</ActionIcon>
-										)}
-									</Flex>
-
-									<Grid grow gutter="sm">
-										<Grid.Col span={7}>
-											<TextInput
-												label="Nombre"
-												value={item.label}
-												onChange={(e) => {
-													const nombre = e.currentTarget.value;
-													updateNombreMateria(i, materiaIndex, nombre);
-												}}
-											/>
-										</Grid.Col>
-
-										<Grid.Col span={7}>
-											<Select
-												label="Cuatrimestre"
-												value={item.cuatrimestre.toString()}
-												data={[
-													{ value: "1", label: "1er Cuatrimestre" },
-													{ value: "2", label: "2do Cuatrimestre" },
-													{ value: "3", label: "Anual" },
-												]}
-												onChange={(value) => {
-													const cuatrimestre = parseInt(value || "1");
-													setPlan((plan) => {
-														plan[i].materias[materiaIndex].cuatrimestre = cuatrimestre;
-														return [...plan];
-													});
-												}}
-												withCheckIcon={false}
-											/>
-										</Grid.Col>
-
-										<Grid.Col span={4}>
-											<Box
-												style={{
-													display: "flex",
-													height: "100%",
-													minWidth: "170px",
-													alignItems: "end",
-												}}
-											>
-												<Checkbox
-													styles={{
-														root: {
-															border: "1px solid var(--mantine-color-dark-4)",
-															backgroundColor: "var(--mantine-color-dark-6)",
-															borderRadius: "4px",
-															height: "calc(2.25rem*var(--mantine-scale))",
-															width: "100%",
-															display: "flex",
-															alignItems: "center",
-															padding: "0 0.5rem",
-														},
-													}}
-													label="Título intermedio"
-													checked={item.tituloIntermedio}
-													onChange={(e) => {
-														const tituloIntermedio = e.currentTarget.checked;
-														setPlan((plan) => {
-															plan[i].materias[materiaIndex].tituloIntermedio = tituloIntermedio;
-															return [...plan];
-														});
-													}}
-												/>
-											</Box>
-										</Grid.Col>
-
-										<Grid.Col span={8}>
-											<MultiSelect
-												label="Correlativas"
-												placeholder="Materias que se requieren para poder cursarla"
-												value={item.requires}
-												multiple
-												searchable
-												data={grouped}
-												onChange={(value) => {
-													if (!value) return;
-													const valueWithCompleto = value.find((v) => v.includes(" (Completo)"));
-													if (valueWithCompleto) {
-														const newValues = value.map((v) => v.replace(" (Completo)", ""));
-														setPlan((plan) => {
-															plan[i].materias[materiaIndex].requires = [...new Set(newValues)];
-															return [...plan];
-														});
-													} else {
-														setPlan((plan) => {
-															plan[i].materias[materiaIndex].requires = value;
-															return [...plan];
-														});
-													}
-												}}
-												withCheckIcon={false}
-											/>
-										</Grid.Col>
-									</Grid>
-								</Paper>
-							);
-						})}
-
-					<Button
-						color="orange"
-						onClick={() => {
-							setPlan((plan) => {
-								plan[i].materias.push({ ...nuevaMateria });
-								return [...plan];
-							});
-						}}
-					>
-						Agregar materia
-					</Button>
-				</Stack>
-			</Accordion.Panel>
-		</Accordion.Item>
-	);
-};

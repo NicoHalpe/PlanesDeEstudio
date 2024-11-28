@@ -3,10 +3,13 @@ import { MarkerType } from "react-flow-renderer";
 type RawMateria = {
 	/* foreground: string;
 	background: string; */
+	id?: string;
 	tituloIntermedio: boolean;
 	label: string;
 	cuatrimestre: number;
 	requires: string[];
+	weekHours?: number;
+	externalLink?: string;
 };
 
 type Year = {

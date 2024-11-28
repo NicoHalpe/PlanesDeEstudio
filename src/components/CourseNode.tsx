@@ -1,3 +1,4 @@
+import { IconExternalLink } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { Handle, NodeProps, Position, useUpdateNodeInternals } from "react-flow-renderer";
 
@@ -33,7 +34,32 @@ function CourseNode({ data, id }: NodeProps) {
 					cursor: "pointer",
 				}}
 			>
-				<span>{data.label}</span>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						justifyContent: "center",
+						alignItems: "center",
+						width: "100%",
+						height: "100%",
+						gap: 3,
+					}}
+				>
+					<span
+						style={{
+							lineHeight: "1.2",
+							overflow: "hidden",
+							textOverflow: "ellipsis",
+							maxHeight: "2.4em",
+							display: "-webkit-box",
+							WebkitLineClamp: 2,
+							WebkitBoxOrient: "vertical",
+						}}
+					>
+						{data.label}
+					</span>
+					<span>{data.weekHours ? `(${data.weekHours}hs)` : ""}</span>
+				</div>
 				{data.enabled && (
 					<input
 						className="noclick"
@@ -42,11 +68,32 @@ function CourseNode({ data, id }: NodeProps) {
 						checked={data.done}
 						style={{
 							position: "absolute",
-							right: 10,
+							left: 10,
 							top: 10,
 							scale: "1.2",
 						}}
 					/>
+				)}
+				{data.externalLink && (
+					<a
+						href={data.externalLink}
+						target="_blank"
+						className="external-link"
+						style={{
+							position: "absolute",
+							right: 10,
+							top: 10,
+							height: 22,
+							width: 22,
+							display: "grid",
+							placeItems: "center",
+							borderRadius: "2px",
+							color: "#000",
+						}}
+						onClick={(e) => e.stopPropagation()}
+					>
+						<IconExternalLink size={20} />
+					</a>
 				)}
 			</div>
 			{data.hasRight ? <Handle type="source" position={Position.Right} /> : null}
