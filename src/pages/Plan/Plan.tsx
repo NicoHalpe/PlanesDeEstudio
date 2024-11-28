@@ -13,20 +13,17 @@ import CourseNode from "../../components/CourseNode";
 import YearNode from "../../components/YearNode";
 import { parsePlans, defaultPlans } from "../../constants";
 import { toPng } from "html-to-image";
-import { Materia, Plan, RawPlan, Year } from "../../types/Plan";
+import { Materia, Plan, Year } from "../../types/Plan";
 import {
 	ActionIcon,
 	Box,
-	ColorSchemeScript,
-	MantineContext,
-	MantineProvider,
-	MantineThemeContext,
 	Select,
 	Text,
 } from "@mantine/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLocalStorage } from "@mantine/hooks";
-import { IconEdit, IconPencil, IconPlus } from "@tabler/icons-react";
+import { IconPencil, IconReload } from "@tabler/icons-react";
+import { modals } from "@mantine/modals";
 
 declare global {
 	interface Window {
@@ -354,31 +351,38 @@ function PlanPage(): ReactElement {
 
 	const nodeMouseEnter: NodeMouseHandler = (_event, element): void => {
 		setPreLabel(label);
-		if (element.id !== clickedCourse) {
-			if (corrAmm[element.id] > 1) {
-				setLabel(
-					"Clickea en " +
-						course_by_id(element.id)?.data.label +
-						" para ver sus " +
-						corrAmm[element.id] +
-						" correlativas"
-				);
-			} else if (corrAmm[element.id] === 1) {
-				setLabel("Clickea en " + course_by_id(element.id)?.data.label + " para ver su correlativa");
-			} else {
-				setLabel(course_by_id(element.id)?.data.label + " no tiene correlativas");
-			}
+		if (element.type === "year") {
+			setLabel("Clickea en " + element.id + " para ver todas las materias de ese año");
+			return;
 		} else {
-			if (corrAmm[element.id] > 1) {
-				setLabel(
-					course_by_id(element.id)?.data.label + " tiene " + corrAmm[element.id] + " correlativas"
-				);
-			} else if (corrAmm[element.id] === 1) {
-				setLabel(course_by_id(element.id)?.data.label + " tiene 1 correlativa");
-			} else if (corrAmm[element.id] === 0) {
-				setLabel(course_by_id(element.id)?.data.label + " no tiene correlativas");
+			if (element.id !== clickedCourse) {
+				if (corrAmm[element.id] > 1) {
+					setLabel(
+						"Clickea en " +
+							course_by_id(element.id)?.data.label +
+							" para ver sus " +
+							corrAmm[element.id] +
+							" correlativas"
+					);
+				} else if (corrAmm[element.id] === 1) {
+					setLabel(
+						"Clickea en " + course_by_id(element.id)?.data.label + " para ver su correlativa"
+					);
+				} else {
+					setLabel(course_by_id(element.id)?.data.label + " no tiene correlativas");
+				}
 			} else {
-				setLabel("Clickea en una materia para ver todas sus correlativas");
+				if (corrAmm[element.id] > 1) {
+					setLabel(
+						course_by_id(element.id)?.data.label + " tiene " + corrAmm[element.id] + " correlativas"
+					);
+				} else if (corrAmm[element.id] === 1) {
+					setLabel(course_by_id(element.id)?.data.label + " tiene 1 correlativa");
+				} else if (corrAmm[element.id] === 0) {
+					setLabel(course_by_id(element.id)?.data.label + " no tiene correlativas");
+				} else {
+					setLabel("Clickea en una materia para ver todas sus correlativas");
+				}
 			}
 		}
 	};
@@ -473,6 +477,25 @@ function PlanPage(): ReactElement {
 							}}
 						>
 							<IconPencil style={{ width: "60%", height: "60%" }} stroke={1} />
+						</ActionIcon>
+
+						<ActionIcon
+							size={"36px"}
+							variant="default"
+							onClick={() => {
+								modals.openConfirmModal({
+									centered: true,
+									title: <b>Restablecer planes</b>,
+									children:
+										"¿Estás seguro de que deseas restablecer los planes a los predeterminados?",
+									labels: { cancel: "Cancelar", confirm: "Restablecer" },
+									onConfirm: () => {
+										setLocalPlans(defaultPlans);
+									},
+								});
+							}}
+						>
+							<IconReload style={{ width: "60%", height: "60%" }} stroke={1} />
 						</ActionIcon>
 					</Box>
 				) : (

@@ -81,8 +81,8 @@ function CourseNode({ data, id }: NodeProps) {
 						className="external-link"
 						style={{
 							position: "absolute",
-							right: 10,
-							top: 10,
+							right: 9,
+							top: 9,
 							height: 22,
 							width: 22,
 							display: "grid",

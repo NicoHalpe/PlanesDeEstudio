@@ -158,6 +158,15 @@ export default function CreatePlan({}: Props) {
 		setSelectedPlanName(nombre);
 	}, [plan, nombre]);
 
+	const changeToPlan = (planName: string) => {
+		const selectedPlan = savedPlans.find((plan) => plan.name === planName);
+		if (selectedPlan) {
+			setSelectedPlanName(selectedPlan.name);
+			setPlan(formatPlan(selectedPlan.plan));
+			setNombre(selectedPlan.name);
+		}
+	};
+
 	const isSmallScreen = useMediaQuery("(max-width: 1250px)");
 
 	const handleImport = () => {
@@ -299,13 +308,14 @@ export default function CreatePlan({}: Props) {
 								data={savedPlans.map((plan) => plan.name)}
 								value={nombre}
 								onChange={(value) => {
-									const plan = savedPlans.find(
+									if(value) changeToPlan(value);
+									/* const plan = savedPlans.find(
 										(plan: { name: string; plan: RawPlan }) => plan.name === value
 									);
 									if (plan) {
-										setNombre(plan.name);
+										setSelectedPlanName(plan.name);
 										setPlan(formatPlan(plan.plan));
-									}
+									} */
 								}}
 							/>
 						)}
