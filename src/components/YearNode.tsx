@@ -34,7 +34,10 @@ function YearNode({ data }: NodeProps) {
 						style={{
 							scale: "1.8",
 						}}
-						onClick={(e) => e.stopPropagation()}
+						onClick={(e) => {
+							window.preventFitView = true;
+							e.stopPropagation();
+						}}
 					/>
 				)}
 
