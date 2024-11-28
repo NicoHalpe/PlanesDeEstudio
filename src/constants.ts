@@ -92,6 +92,7 @@ const parsePlans = (
 				type: "year",
 				data: {
 					label: year,
+					materias: parsedPlan.filter((materia) => materia.data.year === year),
 				},
 				position: { x: 150 + 600 * i, y: 0 },
 			});

@@ -70,7 +70,7 @@ function CourseNode({ data, id }: NodeProps) {
 							position: "absolute",
 							left: 10,
 							top: 10,
-							scale: "1.2",
+							scale: "1.5",
 						}}
 					/>
 				)}

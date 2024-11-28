@@ -14,12 +14,7 @@ import YearNode from "../../components/YearNode";
 import { parsePlans, defaultPlans } from "../../constants";
 import { toPng } from "html-to-image";
 import { Materia, Plan, Year } from "../../types/Plan";
-import {
-	ActionIcon,
-	Box,
-	Select,
-	Text,
-} from "@mantine/core";
+import { ActionIcon, Box, Select, Text } from "@mantine/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLocalStorage } from "@mantine/hooks";
 import { IconPencil, IconReload } from "@tabler/icons-react";
@@ -568,6 +563,22 @@ function PlanPage(): ReactElement {
 								data: {
 									...node.data,
 									onCheck: handleNodeCheck,
+								},
+							};
+						} else if (node.type === "year") {
+							return {
+								...node,
+								data: {
+									...node.data,
+									materias: node.data.materias.map((materia: Materia) => {
+										return {
+											...materia,
+											data: {
+												...materia.data,
+												onCheck: handleNodeCheck,
+											},
+										};
+									}),
 								},
 							};
 						}
