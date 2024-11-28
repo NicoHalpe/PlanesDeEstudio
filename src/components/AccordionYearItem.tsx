@@ -163,6 +163,8 @@ const AccordionYearItem = ({
 											(value) => value === event?.over?.id
 										);
 
+										if(dragIndex === -1 || hoverIndex === -1) return;
+
 										const newItems = arrayMove(materiasOrder, dragIndex, hoverIndex);
 
 										setMateriasOrder(newItems);

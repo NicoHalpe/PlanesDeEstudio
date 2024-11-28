@@ -386,7 +386,7 @@ export default function CreatePlan({}: Props) {
 										onChange={(year) => setActiveYear(year)}
 									>
 										<DndContext
-											onDragStart={(event) => setActiveYear(null)}
+											onDragStart={() => setActiveYear(null)}
 											onDragEnd={(event) => {
 												if (event?.active?.id !== event?.over?.id) {
 													const dragIndex = yearsOrder.findIndex(
