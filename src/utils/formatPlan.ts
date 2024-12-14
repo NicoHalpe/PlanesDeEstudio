@@ -6,7 +6,7 @@ const formatPlan = (plan: RawPlan) => {
 		formattedPlan.push({
 			id: Math.random().toString(36).substr(2, 9),
 			nombre: año,
-			materias: plan[año].map((materia) => {
+			materias: plan[año]!.map((materia) => {
 				return {
 					id: Math.random().toString(36).substr(2, 9),
 					...materia,

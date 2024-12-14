@@ -28,8 +28,7 @@ const parsePlans = (
 	const parsedPlans = plans.map(({ plan, name }) => {
 		const parsedPlan: Plan = [];
 		Object.keys(plan).forEach((year, i) => {
-			if(!plan[year]) return;
-			const sorted = plan[year].sort((a, b) => a.cuatrimestre - b.cuatrimestre);
+			const sorted = plan[year]!.sort((a, b) => a.cuatrimestre - b.cuatrimestre);
 
 			const materiasDelPrimerCuatrimestre = sorted.filter((m) => m.cuatrimestre === 1);
 			const materiasDelSegundoCuatrimestre = sorted.filter((m) => m.cuatrimestre === 2);
