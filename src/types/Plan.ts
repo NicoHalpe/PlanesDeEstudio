@@ -27,7 +27,7 @@ type Edge = {
 };
 
 type RawPlan = {
-	[year: string]: RawMateria[];
+	[year: string]: RawMateria[] | undefined;
 };
 
 type Materia = {

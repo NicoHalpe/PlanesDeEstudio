@@ -378,30 +378,23 @@
                 },
                 {
                     "tituloIntermedio": true,
-                    "label": "Electiva de Introducción a las Ciencias Naturales",
-                    "cuatrimestre": 2,
-                    "requires": [
-                        "CBC"
-                    ]
-                },
-                {
-                    "tituloIntermedio": true,
                     "label": "Análisis I",
                     "cuatrimestre": 2,
                     "requires": [
                         "CBC"
                     ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Algoritmos y Estructuras de Datos II",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "Álgebra I",
+                        "Algoritmos y Estructuras de Datos I"
+                    ]
                 }
             ],
             "2do Año": [
-                {
-                    "tituloIntermedio": true,
-                    "label": "Laboratorio de Datos",
-                    "cuatrimestre": 1,
-                    "requires": [
-                        "Algoritmos y Estructuras de Datos I"
-                    ]
-                },
                 {
                     "tituloIntermedio": true,
                     "label": "Análisis II",
@@ -416,15 +409,14 @@
                     "cuatrimestre": 1,
                     "requires": [
                         "Álgebra I",
-                        "Algoritmos y Estructuras de Datos I"
+                        "Algoritmos y Estructuras de Datos II"
                     ]
                 },
                 {
                     "tituloIntermedio": true,
-                    "label": "Algoritmos y Estructuras de Datos II",
-                    "cuatrimestre": 2,
+                    "label": "Laboratorio de Datos",
+                    "cuatrimestre": 1,
                     "requires": [
-                        "Álgebra I",
                         "Algoritmos y Estructuras de Datos I"
                     ]
                 },
@@ -435,6 +427,14 @@
                     "requires": [
                         "Análisis II",
                         "Álgebra I"
+                    ]
+                },
+                {
+                    "tituloIntermedio": true,
+                    "label": "Electiva de Introducción a las Ciencias Naturales",
+                    "cuatrimestre": 2,
+                    "requires": [
+                        "CBC"
                     ]
                 }
             ],
@@ -467,16 +467,6 @@
                 },
                 {
                     "tituloIntermedio": false,
-                    "label": "Intr. al Modelado Continuo",
-                    "cuatrimestre": 2,
-                    "requires": [
-                        "Análisis Avanzado",
-                        "Álgebra Lineal Computacional",
-                        "Algoritmos y Estructuras de Datos II"
-                    ]
-                },
-                {
-                    "tituloIntermedio": false,
                     "label": "Intr. a la Investigación Operativa y Optimización",
                     "cuatrimestre": 2,
                     "requires": [
@@ -484,23 +474,14 @@
                         "Análisis II",
                         "Álgebra Lineal Computacional"
                     ]
-                }
-            ],
-            "4to Año": [
-                {
-                    "tituloIntermedio": false,
-                    "label": "Materias Optativas",
-                    "cuatrimestre": 1,
-                    "requires": [
-                        "3er Año"
-                    ]
                 },
                 {
                     "tituloIntermedio": false,
-                    "label": "Tésis / Proyecto Final",
+                    "label": "Intr. al Modelado Continuo",
                     "cuatrimestre": 2,
                     "requires": [
-                        "3er Año"
+                        "Análisis Avanzado",
+                        "Álgebra Lineal Computacional"
                     ]
                 }
             ]
